@@ -204,13 +204,13 @@
       <h3 class="en">Install the SWAG Agora plugin</h3>
       <div class="step-body">
         <ol class="zh win">
-          <li>下載 <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora 插件（Windows）</a>。</li>
+          <li>下載 <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/Agora-Tool-4.5.2.4-Installer.exe" target="_blank">SWAG Agora 插件（Windows）</a>。</li>
           <li>解壓縮後，開啟 SWAG Agora 的資料夾。</li>
           <li>雙擊 <code>Agora-Tool-4.5.2.4-Installer</code>。</li>
-          <li>一路點 <b>Next</b>，再點 <b>Install</b> 完成安裝。</li>
+          <li>一路點 <b>Next</b>，再點 <b>Install</b> 完成安裝即可關閉。</li>
         </ol>
         <ol class="en win">
-          <li>Download the <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora plugin (Windows)</a>.</li>
+          <li>Download the <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/Agora-Tool-4.5.2.4-Installer.exe" target="_blank">SWAG Agora plugin (Windows)</a>.</li>
           <li>Unzip it, then open the SWAG Agora folder.</li>
           <li>Double-click <code>Agora-Tool-4.5.2.4-Installer</code>.</li>
           <li>Click <b>Next</b> through the setup, then <b>Install</b> to finish.</li>
@@ -218,12 +218,12 @@
         <div class="shot win"><img src="img/agora_installer.jpg" alt="Agora plugin installer"></div>
 
         <ol class="zh mac">
-          <li>下載 <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/agora-tool-MAC.pkg" target="_blank">SWAG Agora 插件（Mac，.pkg 檔）</a>。</li>
+          <li>下載 <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/agora-tool-MAC.pkg" target="_blank">SWAG Agora 插件</a>。</li>
           <li>下載完點開 <code>agora-tool-MAC.pkg</code> 開始安裝。</li>
           <li>macOS 通常會先擋一次，跳出「未打開」的警告視窗 —— 這是正常的，跟著下面兩步驟排除就好。</li>
         </ol>
         <ol class="en mac">
-          <li>Download the <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/agora-tool-MAC.pkg" target="_blank">SWAG Agora plugin (Mac, .pkg file)</a>.</li>
+          <li>Download the <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/agora-tool-MAC.pkg" target="_blank">SWAG Agora plugin</a>.</li>
           <li>Open <code>agora-tool-MAC.pkg</code> to start installing.</li>
           <li>macOS will usually block it once with a "Not Opened" warning first — that's expected, just follow the two steps below to clear it.</li>
         </ol>
@@ -265,22 +265,21 @@
     <!-- STEP 2 -->
     <div class="step">
       <div class="step-num">2</div>
-      <h3 class="zh">開始直播，打開 Moor 的串流設定視窗</h3>
-      <h3 class="en">Go live and open the stream-setup window in Moor</h3>
+      <h3 class="zh">開始直播，打開 SWAG 的串流設定視窗</h3>
+      <h3 class="en">Go live and open the stream-setup window in SWAG</h3>
       <div class="step-body">
         <ol class="zh">
-          <li>打開 <b>Moor</b>（你平常直播用的網頁），點擊「開始直播」。</li>
+          <li>打開 <b>SWAG</b>，點擊「開始直播」。</li>
           <li>畫面會自動跳出一個「串流設定」視窗。</li>
-          <li>確認視窗標題寫的是 <b>Agora RTC 串流設定</b>。如果顯示 TRTC，點畫面最下面的「切換模式」換成 Agora。</li>
+          <li>確認視窗標題寫的是 <b>Agora RTC 串流設定</b>。</li>
         </ol>
         <ol class="en">
           <li>Open <b>Moor</b> (the web app you use to go live) and click "Start Live".</li>
           <li>A stream-setup window pops up automatically.</li>
-          <li>Check the title says <b>Agora RTC Streaming Configuration</b>. If it shows TRTC instead, tap "Switch mode" at the bottom to switch to Agora.</li>
+          <li>Check the title says <b>Agora RTC Streaming Configuration</b>.</li>
         </ol>
         <div class="shot zh"><img src="img/agora_rtc_popup.jpg" alt="Moor 的 Agora RTC 串流設定彈窗"></div>
         <div class="shot en"><img src="img/agora_rtc_popup_en.jpg" alt="Moor Agora RTC streaming configuration popup"></div>
-        <p class="shot-cap en">Scroll down in the popup to find the "Switch mode" option.</p>
         <div class="callout tip">
           <span class="ic">💡</span>
           <span class="zh"><b>先別關掉這個視窗</b> — 下一步要用到裡面的 4 組資料，等全部貼到 OBS 之後才需要關。</span>
@@ -319,24 +318,19 @@
           <div class="shot"><img src="img/obs_tools_menu_mac_en.jpg" alt="Mac OBS Tools menu"></div>
           <div class="shot"><img src="img/agora_tool_settings_mac_en.jpg" alt="Mac Agora connect settings button"></div>
         </div>
-        <div class="callout tip mac">
-          <span class="ic">💡</span>
-          <span class="zh">Mac 上的按鈕文字有時會顯示簡體字（例如「设置」而不是「設定」），或跟截圖不完全一樣 —— 這是 Agora 插件本身翻譯不一致，位置對就是對的，不用擔心字對不上。</span>
-          <span class="en">On Mac, some button labels may appear in Simplified Chinese or not exactly match this screenshot — that's an inconsistency in the Agora plugin's own translation, not a mistake on your end. Go by position, not exact wording.</span>
-        </div>
       </div>
     </div>
 
     <!-- STEP 4 -->
     <div class="step">
       <div class="step-num">4</div>
-      <h3 class="zh">把 Moor 的資料複製貼到 OBS</h3>
-      <h3 class="en">Copy the values from Moor into OBS</h3>
+      <h3 class="zh">把 SWAG 的資料複製貼到 OBS</h3>
+      <h3 class="en">Copy the values from SWAG into OBS</h3>
       <div class="step-body">
         <p class="zh">回到步驟 2 留著的視窗，把 4 組資料依照下表複製貼到 OBS 的設定視窗裡：</p>
         <p class="en">Go back to the window from step 2, and copy each value into the matching OBS field:</p>
         <table class="map zh win">
-          <tr><th>Moor 顯示的名稱</th><th>貼到 OBS 的欄位</th></tr>
+          <tr><th>SWAG 顯示的名稱</th><th>貼到 OBS 的欄位</th></tr>
           <tr><td>Agora App ID</td><td>APPID</td></tr>
           <tr><td>Agora Token</td><td>AppToken（可選）</td></tr>
           <tr><td>Channel Name</td><td>頻道</td></tr>
@@ -350,14 +344,14 @@
           <tr><td>String Uid</td><td>Uid (Optional)</td></tr>
         </table>
         <table class="map zh mac">
-          <tr><th>Moor 顯示的名稱</th><th>貼到 OBS 的欄位</th></tr>
+          <tr><th>SWAG 顯示的名稱</th><th>貼到 OBS 的欄位</th></tr>
           <tr><td>Agora App ID</td><td>APPID</td></tr>
           <tr><td>Agora Token</td><td>AppToken（可選）</td></tr>
           <tr><td>Channel Name</td><td>頻道</td></tr>
-          <tr><td>String Uid</td><td>用户id（勾選右邊 Basic.Agora.StringUid）</td></tr>
+          <tr><td>String Uid</td><td>用戶id（勾選右邊 Basic.Agora.StringUid）</td></tr>
         </table>
         <table class="map en mac">
-          <tr><th>Moor field</th><th>OBS field</th></tr>
+          <tr><th>SWAG field</th><th>OBS field</th></tr>
           <tr><td>Agora App ID</td><td>Agora APPID</td></tr>
           <tr><td>Agora Token</td><td>Agora Token (Optional)</td></tr>
           <tr><td>Channel Name</td><td>Channel Name</td></tr>
@@ -369,17 +363,17 @@
         <div class="shot en mac"><img src="img/obs_settings_dialog_mac_en.jpg" alt="Mac OBS settings dialog with fields highlighted"></div>
         <div class="callout warn">
           <span class="ic">⚠️</span>
-          <span class="zh win">貼上「用戶ID」後，<b>記得把右邊的「StringUid」打勾</b>。這組 ID 是文字混數字，沒打勾 OBS 會讀成純數字，直播會連不上。</span>
-          <span class="en win"><b>After pasting the Uid, check the "StringUid" box on the right.</b> This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
-          <span class="zh mac">貼上「用户id」後，<b>記得把右邊的「Basic.Agora.StringUid」打勾</b>（沒錯，Mac 上這個核取方塊的名稱沒有翻譯）。這組 ID 是文字混數字，沒打勾 OBS 會讀成純數字，直播會連不上。</span>
-          <span class="en mac"><b>After pasting the Uid, check the "Basic.Agora.StringUid" box on the right</b> (yes, that checkbox label is untranslated on Mac — that's expected). This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
+          <span class="zh win">貼上「用戶ID」後，<b>記得把右邊的「StringUid」打勾</b>。</span>
+          <span class="en win"><b>After pasting the Uid, check the "StringUid" box on the right.</b>.</span>
+          <span class="zh mac">貼上「用戶id」後，<b>記得把右邊的「Basic.Agora.StringUid」打勾</b>。</span>
+          <span class="en mac"><b>After pasting the Uid, check the "Basic.Agora.StringUid" box on the right</b>.</span>
         </div>
         <p class="zh" style="margin-top:14px;">全部貼好、確認打勾後，點擊「確定」。</p>
         <p class="en" style="margin-top:14px;">Once everything is filled in and checked, click <b>OK</b>.</p>
         <div class="callout danger">
           <span class="ic">🔁</span>
           <span class="zh"><b>Channel Name 跟 Agora Token 每場直播都會變</b>，不能沿用上一次的，每次開播都要重新複製貼上。</span>
-          <span class="en"><b>Channel Name and Agora Token change every stream</b> — you can't reuse last time's values. Copy them fresh each time you go live.</span>
+          <span class="en"><b>Channel Name and Agora Token change every stream.</b> Copy them each time.</span>
         </div>
       </div>
     </div>
@@ -393,12 +387,12 @@
         <ol class="zh">
           <li>點擊「開始推流到聲網」。</li>
           <li>按鈕會變成藍色的「停止推流到聲網」——這是正常的，代表已經在推流中，不是壞掉。</li>
-          <li>回到 Moor，畫面顯示「已連接訊號源」就代表成功了！</li>
+          <li>回到 SWAG，畫面顯示「已連接訊號源」就代表成功了！</li>
         </ol>
         <ol class="en">
           <li>Click <b>Start Streaming to Agora</b>.</li>
           <li>The button turns blue and changes to "Stop Streaming to Agora" — that's expected, it just means the stream is now live, not that anything broke.</li>
-          <li>Back in Moor, once you see "Stream Source Connected", you're done!</li>
+          <li>Back in SWAG, once you see "Stream Source Connected", you're done!</li>
         </ol>
         <div class="shot zh win"><img src="img/agora_tool_start.jpg" alt="開始推流到聲網按鈕"></div>
         <div class="shot zh win"><img src="img/final_connected.jpg" alt="已連接訊號源確認畫面"></div>
