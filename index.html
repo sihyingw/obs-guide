@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SWAG OBS 教學 — Windows（Agora 串流設定）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #1b1b1d;
+    --bg-soft: #232326;
+    --card: #26262a;
+    --card-border: #34343a;
+    --teal: #00d2be;
+    --teal-dim: #0a3d3a;
+    --red: #ff4d4f;
+    --text: #f2f2f4;
+    --text-dim: #9d9da5;
+    --text-faint: #6c6c74;
+    --radius: 14px;
+    font-family: "Manrope", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; background: var(--bg); color: var(--text); }
+  body{ line-height: 1.65; font-size: 16px; -webkit-font-smoothing: antialiased; }
+  img{ max-width: 100%; display:block; border-radius: 10px; }
+  a{ color: var(--teal); text-decoration: none; border-bottom: 1px solid rgba(0,210,190,0.35); }
+  a:hover{ border-bottom-color: var(--teal); }
+  code{ background: #1a1a1c; border: 1px solid var(--card-border); border-radius: 6px; padding: .15em .5em; font-size: .92em; color: #ffd479; font-family: ui-monospace, "SF Mono", Consolas, monospace; }
+
+  /* language visibility */
+  body.lang-zh .en{ display:none; }
+  body.lang-en .zh{ display:none; }
+
+  header.top{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(27,27,29,0.88); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .top-inner{
+    max-width: 860px; margin: 0 auto; padding: 14px 20px;
+    display:flex; align-items:center; justify-content: space-between; gap: 16px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand img{ width: 30px; height:30px; border-radius:0; }
+  .brand-title{ font-weight:800; font-size: 15px; letter-spacing: .2px; }
+  .brand-title .sub{ display:block; font-weight:500; font-size:11.5px; color: var(--text-dim); margin-top:1px;}
+
+  .lang-toggle{
+    display:flex; background: var(--bg-soft); border: 1px solid var(--card-border);
+    border-radius: 999px; padding: 3px; gap: 2px; flex-shrink:0;
+  }
+  .lang-toggle button{
+    border:none; background: transparent; color: var(--text-dim);
+    padding: 6px 14px; border-radius: 999px; font-weight:700; font-size: 13px;
+    cursor:pointer; font-family: inherit;
+  }
+  .lang-toggle button.active{ background: var(--teal); color: #05201d; }
+
+  main{ max-width: 860px; margin: 0 auto; padding: 28px 20px 100px; }
+
+  .hero{ padding: 20px 4px 34px; }
+  .hero .eyebrow{ color: var(--teal); font-weight:800; font-size: 13px; letter-spacing: 1.2px; text-transform: uppercase; }
+  .hero h1{ font-size: 28px; font-weight: 800; margin: 10px 0 12px; line-height:1.35; }
+  .hero p{ color: var(--text-dim); font-size: 15.5px; max-width: 640px; }
+
+  .prep{
+    background: var(--card); border:1px solid var(--card-border); border-radius: var(--radius);
+    padding: 20px 22px; margin-bottom: 8px;
+  }
+  .prep h2{ font-size:15px; margin:0 0 12px; color: var(--text-dim); font-weight:800; text-transform:uppercase; letter-spacing:.6px;}
+  .prep ul{ margin:0; padding-left: 1.2em; }
+  .prep li{ margin-bottom: 8px; }
+  .prep li:last-child{ margin-bottom:0; }
+
+  .timeline{ position: relative; margin-top: 30px; }
+  .step{ position: relative; padding-left: 56px; padding-bottom: 44px; }
+  .step:last-child{ padding-bottom: 0; }
+  .step::before{ /* connecting line */
+    content:""; position:absolute; left: 21px; top: 46px; bottom: -6px; width: 2px;
+    background: linear-gradient(to bottom, var(--card-border), var(--card-border));
+  }
+  .step:last-child::before{ display:none; }
+  .step-num{
+    position:absolute; left:0; top:0; width:44px; height:44px; border-radius:50%;
+    background: var(--bg-soft); border: 2px solid var(--teal); color: var(--teal);
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:17px;
+    z-index: 2;
+  }
+  .step h3{ font-size: 19px; margin: 2px 0 12px; font-weight: 800; }
+  .step-body{ background: var(--card); border:1px solid var(--card-border); border-radius: var(--radius); padding: 18px 20px; }
+  .step-body ol, .step-body ul{ margin: 0 0 14px; padding-left: 1.25em; }
+  .step-body li{ margin-bottom: 8px; }
+  .step-body li:last-child{ margin-bottom:0; }
+  .step-body > *:last-child{ margin-bottom: 0; }
+  .step-body p{ margin: 0 0 14px; }
+
+  .shot{ margin: 14px 0; border-radius: 10px; overflow:hidden; border:1px solid var(--card-border); background:#000; }
+  .shot-cap{ font-size: 12.5px; color: var(--text-faint); margin: -8px 0 14px; padding-left: 2px; }
+  .shot-row{ display:flex; gap:12px; flex-wrap:wrap; margin: 14px 0; }
+  .shot-row .shot{ flex: 1 1 240px; margin:0; }
+
+  .callout{
+    border-radius: 10px; padding: 13px 16px; margin: 14px 0; font-size: 14.5px;
+    border: 1px solid; display:flex; gap: 10px;
+  }
+  .callout .ic{ flex-shrink:0; font-size: 16px; line-height:1.5; }
+  .callout.tip{ background: var(--teal-dim); border-color: rgba(0,210,190,.4); color: #d8fbf6; }
+  .callout.warn{ background: #3a2410; border-color: rgba(255,170,60,.4); color: #ffe2b8; }
+  .callout.danger{ background: #3a1616; border-color: rgba(255,77,79,.4); color: #ffd6d6; }
+  .callout b{ color: inherit; }
+
+  table.map{ width:100%; border-collapse: collapse; margin: 6px 0 16px; font-size: 14px; }
+  table.map th, table.map td{ text-align:left; padding: 8px 10px; border-bottom: 1px solid var(--card-border); }
+  table.map th{ color: var(--text-dim); font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.4px; }
+  table.map td:nth-child(1){ color: var(--text-dim); }
+  table.map td:nth-child(2){ color: var(--teal); font-weight:700; }
+  table.map tr:last-child td{ border-bottom:none; }
+  .arrow{ color: var(--text-faint); padding: 0 6px; }
+
+  .notes{ margin-top: 46px; }
+  .notes h2{ font-size: 20px; font-weight:800; margin-bottom: 14px; }
+  .notes .step-body{ background: var(--card); }
+
+  footer.site{ text-align:center; color: var(--text-faint); font-size: 12.5px; padding: 30px 20px 50px; }
+
+  @media (max-width: 520px){
+    .hero h1{ font-size: 23px; }
+    .step{ padding-left: 46px; }
+    .step-num{ width:36px; height:36px; font-size:14px; }
+    .step::before{ left:17px; top:40px; }
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <img src="img/swag_logo.png" alt="SWAG">
+      <div class="brand-title">
+        SWAG OBS <span class="zh">教學</span><span class="en">Guide</span>
+        <span class="sub zh">Windows・Agora 串流設定</span>
+        <span class="sub en">Windows · Agora streaming setup</span>
+      </div>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="eyebrow zh">主播教學</div>
+    <div class="eyebrow en">Creator guide</div>
+    <h1 class="zh">用 OBS 開台：Agora 串流設定</h1>
+    <h1 class="en">Go live with OBS: Agora streaming setup</h1>
+    <p class="zh">跟著下面 6 個步驟，把 Moor 給你的串流金鑰接到 OBS，大約 5 分鐘可以完成。每一步都附截圖，畫面上紅框標出來的地方就是要點的按鈕或要貼上的欄位。</p>
+    <p class="en">Follow the 6 steps below to connect your Moor stream keys to OBS — it takes about 5 minutes. Every step includes a screenshot; the red box marks the exact button to click or field to fill in.</p>
+  </section>
+
+  <div class="prep">
+    <h2 class="zh">開始之前</h2>
+    <h2 class="en">Before you start</h2>
+    <ul class="zh">
+      <li>在電腦上下載並安裝 <a href="https://obsproject.com/download" target="_blank">OBS</a>。如果已經裝過，確認版本在 <b>31</b> 以上。</li>
+      <li>在 <a href="https://swag.live" target="_blank">swag.live</a> 登入你的 SWAG 創作者帳號。</li>
+    </ul>
+    <ul class="en">
+      <li>Download and install <a href="https://obsproject.com/download" target="_blank">OBS</a> on your computer. If it's already installed, make sure it's version <b>31</b> or later.</li>
+      <li>Log in to your SWAG creator account at <a href="https://swag.live" target="_blank">swag.live</a>.</li>
+    </ul>
+  </div>
+
+  <div class="timeline">
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3 class="zh">安裝 SWAG Agora 插件</h3>
+      <h3 class="en">Install the SWAG Agora plugin</h3>
+      <div class="step-body">
+        <ol class="zh">
+          <li>下載 <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora 插件</a>。</li>
+          <li>解壓縮後，開啟 SWAG Agora 的資料夾。</li>
+          <li>雙擊 <code>Agora-Tool-4.5.2.4-Installer</code>。</li>
+          <li>一路點 <b>Next</b>，再點 <b>Install</b> 完成安裝。</li>
+        </ol>
+        <ol class="en">
+          <li>Download the <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora plugin</a>.</li>
+          <li>Unzip it, then open the SWAG Agora folder.</li>
+          <li>Double-click <code>Agora-Tool-4.5.2.4-Installer</code>.</li>
+          <li>Click <b>Next</b> through the setup, then <b>Install</b> to finish.</li>
+        </ol>
+        <div class="shot"><img src="img/agora_installer.jpg" alt="Agora plugin installer"></div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3 class="zh">開始直播，打開 Moor 的串流設定視窗</h3>
+      <h3 class="en">Go live and open the stream-setup window in Moor</h3>
+      <div class="step-body">
+        <ol class="zh">
+          <li>打開 <b>Moor</b>（你平常直播用的網頁），點擊「開始直播」。</li>
+          <li>畫面會自動跳出一個「串流設定」視窗。</li>
+          <li>確認視窗標題寫的是 <b>Agora RTC 串流設定</b>。如果顯示 TRTC，點畫面最下面的「切換模式」換成 Agora。</li>
+        </ol>
+        <ol class="en">
+          <li>Open <b>Moor</b> (the web app you use to go live) and click "Start Live".</li>
+          <li>A stream-setup window pops up automatically.</li>
+          <li>Check the title says <b>Agora RTC 串流設定</b>. If it shows TRTC instead, tap "切換模式" at the bottom to switch to Agora.</li>
+        </ol>
+        <div class="shot"><img src="img/agora_rtc_popup.jpg" alt="Moor Agora RTC popup"></div>
+        <div class="callout tip">
+          <span class="ic">💡</span>
+          <span class="zh"><b>先別關掉這個視窗</b> — 下一步要用到裡面的 4 組資料，等全部貼到 OBS 之後才需要關。</span>
+          <span class="en"><b>Keep this window open</b> — you'll copy 4 values from it in a later step. Only close it after everything is pasted into OBS.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3 class="zh">在 OBS 打開聲網連麥設定</h3>
+      <h3 class="en">Open the Agora connect settings in OBS</h3>
+      <div class="step-body">
+        <ol class="zh">
+          <li>開啟 OBS，點擊上方選單「工具」→「聲網連麥」。</li>
+          <li>跳出的小視窗裡，點擊「設定」。</li>
+        </ol>
+        <ol class="en">
+          <li>Open OBS, then click <b>Tools</b> → <b>聲網連麥</b> (Agora Connect) in the top menu.</li>
+          <li>In the window that appears, click <b>設定</b> (Settings).</li>
+        </ol>
+        <div class="shot-row">
+          <div class="shot"><img src="img/obs_tools_menu.jpg" alt="OBS Tools menu"></div>
+          <div class="shot"><img src="img/agora_tool_settings.jpg" alt="Agora connect settings button"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3 class="zh">把 Moor 的資料複製貼到 OBS</h3>
+      <h3 class="en">Copy the values from Moor into OBS</h3>
+      <div class="step-body">
+        <p class="zh">回到步驟 2 留著的視窗，把 4 組資料依照下表複製貼到 OBS 的設定視窗裡：</p>
+        <p class="en">Go back to the window from step 2, and copy each value into the matching OBS field:</p>
+        <table class="map">
+          <tr>
+            <th class="zh">Moor 顯示的名稱</th><th class="zh">貼到 OBS 的欄位</th>
+            <th class="en">Moor field</th><th class="en">OBS field</th>
+          </tr>
+          <tr><td>Agora App ID</td><td>APPID</td></tr>
+          <tr><td>Agora Token</td><td>AppToken（可選 / optional）</td></tr>
+          <tr><td>Channel Name</td><td>頻道</td></tr>
+          <tr><td>String Uid</td><td>用戶ID</td></tr>
+        </table>
+        <div class="shot"><img src="img/obs_settings_dialog.jpg" alt="OBS settings dialog with fields highlighted"></div>
+        <div class="callout warn">
+          <span class="ic">⚠️</span>
+          <span class="zh">貼上「用戶ID」後，<b>記得把右邊的「StringUid」打勾</b>。這組 ID 是文字混數字，沒打勾 OBS 會讀成純數字，直播會連不上。</span>
+          <span class="en"><b>After pasting 用戶ID, check the "StringUid" box on the right.</b> This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
+        </div>
+        <p class="zh" style="margin-top:14px;">全部貼好、確認打勾後，點擊「確定」。</p>
+        <p class="en" style="margin-top:14px;">Once everything is filled in and checked, click <b>確定</b> (Confirm).</p>
+        <div class="callout danger">
+          <span class="ic">🔁</span>
+          <span class="zh"><b>Channel Name 跟 Agora Token 每場直播都會變</b>，不能沿用上一次的，每次開播都要重新複製貼上。</span>
+          <span class="en"><b>Channel Name and Agora Token change every stream</b> — you can't reuse last time's values. Copy them fresh each time you go live.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step">
+      <div class="step-num">5</div>
+      <h3 class="zh">開始推流</h3>
+      <h3 class="en">Start streaming</h3>
+      <div class="step-body">
+        <ol class="zh">
+          <li>點擊「開始推流到聲網」。</li>
+          <li>按鈕會變成藍色的「停止推流到聲網」——這是正常的，代表已經在推流中，不是壞掉。</li>
+          <li>回到 Moor，畫面顯示「已連接訊號源」就代表成功了！</li>
+        </ol>
+        <ol class="en">
+          <li>Click <b>開始推流到聲網</b> (Start pushing to Agora).</li>
+          <li>The button turns blue and changes to "停止推流到聲網" (Stop) — that's expected, it just means the stream is now live, not that anything broke.</li>
+          <li>Back in Moor, once you see "已連接訊號源" (Signal source connected), you're done!</li>
+        </ol>
+        <div class="shot"><img src="img/agora_tool_start.jpg" alt="Start pushing to Agora button"></div>
+        <div class="shot"><img src="img/final_connected.jpg" alt="Connected confirmation"></div>
+        <div class="callout tip">
+          <span class="ic">💡</span>
+          <span class="zh">記得別關掉「聲網連麥」這個視窗，關掉的話畫面會中斷。</span>
+          <span class="en">Don't close the "聲網連麥" window while live — closing it will cut the stream.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <section class="notes">
+    <h2 class="zh">常見問題</h2>
+    <h2 class="en">Troubleshooting</h2>
+    <div class="step-body">
+      <p class="zh"><b>每次開播都要重新貼一次資料嗎？</b><br>是的——Channel Name 跟 Agora Token 每場直播都會變動，開播前務必回到 Moor 複製最新的值。</p>
+      <p class="en"><b>Do I need to re-paste the values every time?</b><br>Yes — Channel Name and Agora Token change every stream, so copy the latest values from Moor before each broadcast.</p>
+      <p class="zh" style="margin-top:18px;"><b>OBS 啟動時出現無法載入 "agora-ui-tools" 的錯誤？</b><br>到 <code>C:\Program Files\obs-studio\data\obs-plugins</code>，移除資料夾裡的 <code>agora-tool-ui</code>，重新安裝 Agora 插件後重啟 OBS 即可修正。</p>
+      <p class="en" style="margin-top:18px;"><b>OBS shows an error that it can't load "agora-ui-tools"?</b><br>Go to <code>C:\Program Files\obs-studio\data\obs-plugins</code>, remove the <code>agora-tool-ui</code> folder, reinstall the Agora plugin, then restart OBS.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <span class="zh">SWAG 創作者教學 · 有問題請聯絡你的經紀公司或平台窗口</span>
+  <span class="en">SWAG Creator Guide · Questions? Contact your agency or platform support</span>
+</footer>
+
+<script>
+  function setLang(lang){
+    document.body.className = 'lang-' + lang;
+    document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+  }
+</script>
+
+</body>
+</html>
