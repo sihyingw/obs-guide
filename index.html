@@ -215,9 +215,11 @@
         <ol class="en">
           <li>Open <b>Moor</b> (the web app you use to go live) and click "Start Live".</li>
           <li>A stream-setup window pops up automatically.</li>
-          <li>Check the title says <b>Agora RTC 串流設定</b>. If it shows TRTC instead, tap "切換模式" at the bottom to switch to Agora.</li>
+          <li>Check the title says <b>Agora RTC Streaming Configuration</b>. If it shows TRTC instead, tap "Switch mode" at the bottom to switch to Agora.</li>
         </ol>
-        <div class="shot"><img src="img/agora_rtc_popup.jpg" alt="Moor Agora RTC popup"></div>
+        <div class="shot zh"><img src="img/agora_rtc_popup.jpg" alt="Moor 的 Agora RTC 串流設定彈窗"></div>
+        <div class="shot en"><img src="img/agora_rtc_popup_en.jpg" alt="Moor Agora RTC streaming configuration popup"></div>
+        <p class="shot-cap en">Scroll down in the popup to find the "Switch mode" option.</p>
         <div class="callout tip">
           <span class="ic">💡</span>
           <span class="zh"><b>先別關掉這個視窗</b> — 下一步要用到裡面的 4 組資料，等全部貼到 OBS 之後才需要關。</span>
@@ -237,12 +239,16 @@
           <li>跳出的小視窗裡，點擊「設定」。</li>
         </ol>
         <ol class="en">
-          <li>Open OBS, then click <b>Tools</b> → <b>聲網連麥</b> (Agora Connect) in the top menu.</li>
-          <li>In the window that appears, click <b>設定</b> (Settings).</li>
+          <li>Open OBS, then click <b>Tools</b> → <b>Agora RTC Tool</b> in the top menu.</li>
+          <li>In the window that appears, click <b>Settings</b>.</li>
         </ol>
-        <div class="shot-row">
-          <div class="shot"><img src="img/obs_tools_menu.jpg" alt="OBS Tools menu"></div>
-          <div class="shot"><img src="img/agora_tool_settings.jpg" alt="Agora connect settings button"></div>
+        <div class="shot-row zh">
+          <div class="shot"><img src="img/obs_tools_menu.jpg" alt="OBS 工具選單"></div>
+          <div class="shot"><img src="img/agora_tool_settings.jpg" alt="聲網連麥設定按鈕"></div>
+        </div>
+        <div class="shot-row en">
+          <div class="shot"><img src="img/obs_tools_menu_en.jpg" alt="OBS Tools menu"></div>
+          <div class="shot"><img src="img/agora_tool_settings_en.jpg" alt="Agora connect settings button"></div>
         </div>
       </div>
     </div>
@@ -255,24 +261,29 @@
       <div class="step-body">
         <p class="zh">回到步驟 2 留著的視窗，把 4 組資料依照下表複製貼到 OBS 的設定視窗裡：</p>
         <p class="en">Go back to the window from step 2, and copy each value into the matching OBS field:</p>
-        <table class="map">
-          <tr>
-            <th class="zh">Moor 顯示的名稱</th><th class="zh">貼到 OBS 的欄位</th>
-            <th class="en">Moor field</th><th class="en">OBS field</th>
-          </tr>
+        <table class="map zh">
+          <tr><th>Moor 顯示的名稱</th><th>貼到 OBS 的欄位</th></tr>
           <tr><td>Agora App ID</td><td>APPID</td></tr>
-          <tr><td>Agora Token</td><td>AppToken（可選 / optional）</td></tr>
+          <tr><td>Agora Token</td><td>AppToken（可選）</td></tr>
           <tr><td>Channel Name</td><td>頻道</td></tr>
           <tr><td>String Uid</td><td>用戶ID</td></tr>
         </table>
-        <div class="shot"><img src="img/obs_settings_dialog.jpg" alt="OBS settings dialog with fields highlighted"></div>
+        <table class="map en">
+          <tr><th>Moor field</th><th>OBS field</th></tr>
+          <tr><td>Agora App ID</td><td>Agora APPID</td></tr>
+          <tr><td>Agora Token</td><td>Token (Optional)</td></tr>
+          <tr><td>Channel Name</td><td>Channel Name</td></tr>
+          <tr><td>String Uid</td><td>Uid (Optional)</td></tr>
+        </table>
+        <div class="shot zh"><img src="img/obs_settings_dialog.jpg" alt="OBS 設定對話框，欄位已標紅框"></div>
+        <div class="shot en"><img src="img/obs_settings_dialog_en.jpg" alt="OBS settings dialog with fields highlighted"></div>
         <div class="callout warn">
           <span class="ic">⚠️</span>
           <span class="zh">貼上「用戶ID」後，<b>記得把右邊的「StringUid」打勾</b>。這組 ID 是文字混數字，沒打勾 OBS 會讀成純數字，直播會連不上。</span>
-          <span class="en"><b>After pasting 用戶ID, check the "StringUid" box on the right.</b> This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
+          <span class="en"><b>After pasting the Uid, check the "StringUid" box on the right.</b> This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
         </div>
         <p class="zh" style="margin-top:14px;">全部貼好、確認打勾後，點擊「確定」。</p>
-        <p class="en" style="margin-top:14px;">Once everything is filled in and checked, click <b>確定</b> (Confirm).</p>
+        <p class="en" style="margin-top:14px;">Once everything is filled in and checked, click <b>OK</b>.</p>
         <div class="callout danger">
           <span class="ic">🔁</span>
           <span class="zh"><b>Channel Name 跟 Agora Token 每場直播都會變</b>，不能沿用上一次的，每次開播都要重新複製貼上。</span>
@@ -293,16 +304,18 @@
           <li>回到 Moor，畫面顯示「已連接訊號源」就代表成功了！</li>
         </ol>
         <ol class="en">
-          <li>Click <b>開始推流到聲網</b> (Start pushing to Agora).</li>
-          <li>The button turns blue and changes to "停止推流到聲網" (Stop) — that's expected, it just means the stream is now live, not that anything broke.</li>
-          <li>Back in Moor, once you see "已連接訊號源" (Signal source connected), you're done!</li>
+          <li>Click <b>Start Streaming to Agora</b>.</li>
+          <li>The button turns blue and changes to "Stop Streaming to Agora" — that's expected, it just means the stream is now live, not that anything broke.</li>
+          <li>Back in Moor, once you see "Stream Source Connected", you're done!</li>
         </ol>
-        <div class="shot"><img src="img/agora_tool_start.jpg" alt="Start pushing to Agora button"></div>
-        <div class="shot"><img src="img/final_connected.jpg" alt="Connected confirmation"></div>
+        <div class="shot zh"><img src="img/agora_tool_start.jpg" alt="開始推流到聲網按鈕"></div>
+        <div class="shot zh"><img src="img/final_connected.jpg" alt="已連接訊號源確認畫面"></div>
+        <div class="shot en"><img src="img/agora_tool_start_en.jpg" alt="Start Streaming to Agora button"></div>
+        <div class="shot en"><img src="img/final_connected_en.jpg" alt="Stream Source Connected confirmation"></div>
         <div class="callout tip">
           <span class="ic">💡</span>
           <span class="zh">記得別關掉「聲網連麥」這個視窗，關掉的話畫面會中斷。</span>
-          <span class="en">Don't close the "聲網連麥" window while live — closing it will cut the stream.</span>
+          <span class="en">Don't close the "Agora RTC Tool" window while live — closing it will cut the stream.</span>
         </div>
       </div>
     </div>
