@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SWAG OBS 教學 — Windows（Agora 串流設定）</title>
+<title>SWAG OBS 教學（Agora 串流設定）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
@@ -33,6 +33,9 @@
   /* language visibility */
   body.lang-zh .en{ display:none; }
   body.lang-en .zh{ display:none; }
+  /* OS visibility */
+  body.os-win .mac{ display:none; }
+  body.os-mac .win{ display:none; }
 
   header.top{
     position: sticky; top:0; z-index: 50;
@@ -41,8 +44,9 @@
   }
   .top-inner{
     max-width: 860px; margin: 0 auto; padding: 14px 20px;
-    display:flex; align-items:center; justify-content: space-between; gap: 16px;
+    display:flex; align-items:center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
   }
+  .toggles{ display:flex; align-items:center; gap:8px; flex-shrink:0; }
   .brand{ display:flex; align-items:center; gap:10px; }
   .brand img{ width: 30px; height:30px; border-radius:0; }
   .brand-title{ font-weight:800; font-size: 15px; letter-spacing: .2px; }
@@ -124,6 +128,14 @@
   .notes h2{ font-size: 20px; font-weight:800; margin-bottom: 14px; }
   .notes .step-body{ background: var(--card); }
 
+  .videos{ margin-top: 46px; }
+  .videos h2{ font-size: 20px; font-weight:800; margin-bottom: 6px; }
+  .videos .sub{ color: var(--text-dim); font-size: 14px; margin-bottom: 16px; }
+  .video-grid{ display:flex; gap:16px; flex-wrap:wrap; }
+  .video-card{ flex:1 1 320px; background: var(--card); border:1px solid var(--card-border); border-radius: var(--radius); padding: 14px; }
+  .video-card .label{ font-weight:800; font-size:14px; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .video-card video{ width:100%; border-radius:8px; border:1px solid var(--card-border); background:#000; display:block; }
+
   footer.site{ text-align:center; color: var(--text-faint); font-size: 12.5px; padding: 30px 20px 50px; }
 
   @media (max-width: 520px){
@@ -134,7 +146,7 @@
   }
 </style>
 </head>
-<body class="lang-zh">
+<body class="lang-zh os-win">
 
 <header class="top">
   <div class="top-inner">
@@ -142,13 +154,19 @@
       <img src="img/swag_logo.png" alt="SWAG">
       <div class="brand-title">
         SWAG OBS <span class="zh">教學</span><span class="en">Guide</span>
-        <span class="sub zh">Windows・Agora 串流設定</span>
-        <span class="sub en">Windows · Agora streaming setup</span>
+        <span class="sub zh">Agora 串流設定</span>
+        <span class="sub en">Agora streaming setup</span>
       </div>
     </div>
-    <div class="lang-toggle" role="group" aria-label="Language">
-      <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
-      <button id="btn-en" onclick="setLang('en')">EN</button>
+    <div class="toggles">
+      <div class="lang-toggle" role="group" aria-label="Operating system">
+        <button id="btn-win" class="active" onclick="setOS('win')">Windows</button>
+        <button id="btn-mac" onclick="setOS('mac')">Mac</button>
+      </div>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
     </div>
   </div>
 </header>
@@ -185,19 +203,62 @@
       <h3 class="zh">安裝 SWAG Agora 插件</h3>
       <h3 class="en">Install the SWAG Agora plugin</h3>
       <div class="step-body">
-        <ol class="zh">
-          <li>下載 <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora 插件</a>。</li>
+        <ol class="zh win">
+          <li>下載 <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora 插件（Windows）</a>。</li>
           <li>解壓縮後，開啟 SWAG Agora 的資料夾。</li>
           <li>雙擊 <code>Agora-Tool-4.5.2.4-Installer</code>。</li>
           <li>一路點 <b>Next</b>，再點 <b>Install</b> 完成安裝。</li>
         </ol>
-        <ol class="en">
-          <li>Download the <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora plugin</a>.</li>
+        <ol class="en win">
+          <li>Download the <a href="https://drive.google.com/drive/folders/1w-qx4CFXEttRtlL-a_rEaqT4N0gBHESW?usp=drive_link" target="_blank">SWAG Agora plugin (Windows)</a>.</li>
           <li>Unzip it, then open the SWAG Agora folder.</li>
           <li>Double-click <code>Agora-Tool-4.5.2.4-Installer</code>.</li>
           <li>Click <b>Next</b> through the setup, then <b>Install</b> to finish.</li>
         </ol>
-        <div class="shot"><img src="img/agora_installer.jpg" alt="Agora plugin installer"></div>
+        <div class="shot win"><img src="img/agora_installer.jpg" alt="Agora plugin installer"></div>
+
+        <ol class="zh mac">
+          <li>下載 <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/agora-tool-MAC.pkg" target="_blank">SWAG Agora 插件（Mac，.pkg 檔）</a>。</li>
+          <li>下載完點開 <code>agora-tool-MAC.pkg</code> 開始安裝。</li>
+          <li>macOS 通常會先擋一次，跳出「未打開」的警告視窗 —— 這是正常的，跟著下面兩步驟排除就好。</li>
+        </ol>
+        <ol class="en mac">
+          <li>Download the <a href="https://github.com/AgoraIO/OBS/releases/download/4.5.2/agora-tool-MAC.pkg" target="_blank">SWAG Agora plugin (Mac, .pkg file)</a>.</li>
+          <li>Open <code>agora-tool-MAC.pkg</code> to start installing.</li>
+          <li>macOS will usually block it once with a "Not Opened" warning first — that's expected, just follow the two steps below to clear it.</li>
+        </ol>
+
+        <div class="callout warn mac">
+          <span class="ic">🔒</span>
+          <span class="zh">跟 Windows 不同，Mac 會先擋下這個安裝檔，需要手動放行一次才能繼續安裝。</span>
+          <span class="en">Unlike Windows, macOS blocks this installer once by default — you'll need to manually allow it before setup can continue.</span>
+        </div>
+
+        <p class="zh mac" style="margin-top:14px; font-weight:800;">如果跳出「未打開」警告視窗：</p>
+        <p class="en mac" style="margin-top:14px; font-weight:800;">If you see a "Not Opened" warning window:</p>
+        <ol class="zh mac">
+          <li>在警告視窗中按 <b>「完成」</b>（不要選「丟到垃圾桶」）。</li>
+        </ol>
+        <ol class="en mac">
+          <li>Click <b>Done</b> in the warning popup (do not choose "Move to Trash").</li>
+        </ol>
+        <div class="shot zh mac"><img src="img/mac_security_warning.jpg" alt="macOS 未打開警告視窗，完成按鈕已標紅框"></div>
+        <div class="shot en mac"><img src="img/mac_security_warning_en.jpg" alt="macOS Not Opened warning, Done button highlighted"></div>
+
+        <p class="zh mac" style="margin-top:6px; font-weight:800;">接著手動放行：</p>
+        <p class="en mac" style="margin-top:6px; font-weight:800;">Then manually allow it:</p>
+        <ol class="zh mac">
+          <li>打開 <b>系統設定 → 隱私權與安全性</b>。</li>
+          <li>往下滑，找到被阻擋的 <code>agora-tool-MAC.pkg</code>，點 <b>「強制打開」</b>。</li>
+          <li>再點一次「強制打開」，輸入電腦密碼即可。完成後就能正常繼續安裝插件。</li>
+        </ol>
+        <ol class="en mac">
+          <li>Open <b>System Settings → Privacy & Security</b>.</li>
+          <li>Scroll down to find the blocked <code>agora-tool-MAC.pkg</code>, then click <b>Open Anyway</b>.</li>
+          <li>Click <b>Open Anyway</b> again and enter your Mac password. The installer will then continue normally.</li>
+        </ol>
+        <div class="shot zh mac"><img src="img/mac_privacy_settings.jpg" alt="系統設定隱私權與安全性，強制打開按鈕已標紅框"></div>
+        <div class="shot en mac"><img src="img/mac_privacy_settings_en.jpg" alt="Privacy & Security settings, Open Anyway button highlighted"></div>
       </div>
     </div>
 
@@ -242,13 +303,26 @@
           <li>Open OBS, then click <b>Tools</b> → <b>Agora RTC Tool</b> in the top menu.</li>
           <li>In the window that appears, click <b>Settings</b>.</li>
         </ol>
-        <div class="shot-row zh">
+        <div class="shot-row zh win">
           <div class="shot"><img src="img/obs_tools_menu.jpg" alt="OBS 工具選單"></div>
           <div class="shot"><img src="img/agora_tool_settings.jpg" alt="聲網連麥設定按鈕"></div>
         </div>
-        <div class="shot-row en">
+        <div class="shot-row en win">
           <div class="shot"><img src="img/obs_tools_menu_en.jpg" alt="OBS Tools menu"></div>
           <div class="shot"><img src="img/agora_tool_settings_en.jpg" alt="Agora connect settings button"></div>
+        </div>
+        <div class="shot-row zh mac">
+          <div class="shot"><img src="img/obs_tools_menu_mac.jpg" alt="Mac OBS 工具選單"></div>
+          <div class="shot"><img src="img/agora_tool_settings_mac.jpg" alt="Mac 聲網連麥設定按鈕"></div>
+        </div>
+        <div class="shot-row en mac">
+          <div class="shot"><img src="img/obs_tools_menu_mac_en.jpg" alt="Mac OBS Tools menu"></div>
+          <div class="shot"><img src="img/agora_tool_settings_mac_en.jpg" alt="Mac Agora connect settings button"></div>
+        </div>
+        <div class="callout tip mac">
+          <span class="ic">💡</span>
+          <span class="zh">Mac 上的按鈕文字有時會顯示簡體字（例如「设置」而不是「設定」），或跟截圖不完全一樣 —— 這是 Agora 插件本身翻譯不一致，位置對就是對的，不用擔心字對不上。</span>
+          <span class="en">On Mac, some button labels may appear in Simplified Chinese or not exactly match this screenshot — that's an inconsistency in the Agora plugin's own translation, not a mistake on your end. Go by position, not exact wording.</span>
         </div>
       </div>
     </div>
@@ -261,26 +335,44 @@
       <div class="step-body">
         <p class="zh">回到步驟 2 留著的視窗，把 4 組資料依照下表複製貼到 OBS 的設定視窗裡：</p>
         <p class="en">Go back to the window from step 2, and copy each value into the matching OBS field:</p>
-        <table class="map zh">
+        <table class="map zh win">
           <tr><th>Moor 顯示的名稱</th><th>貼到 OBS 的欄位</th></tr>
           <tr><td>Agora App ID</td><td>APPID</td></tr>
           <tr><td>Agora Token</td><td>AppToken（可選）</td></tr>
           <tr><td>Channel Name</td><td>頻道</td></tr>
           <tr><td>String Uid</td><td>用戶ID</td></tr>
         </table>
-        <table class="map en">
+        <table class="map en win">
           <tr><th>Moor field</th><th>OBS field</th></tr>
           <tr><td>Agora App ID</td><td>Agora APPID</td></tr>
           <tr><td>Agora Token</td><td>Token (Optional)</td></tr>
           <tr><td>Channel Name</td><td>Channel Name</td></tr>
           <tr><td>String Uid</td><td>Uid (Optional)</td></tr>
         </table>
-        <div class="shot zh"><img src="img/obs_settings_dialog.jpg" alt="OBS 設定對話框，欄位已標紅框"></div>
-        <div class="shot en"><img src="img/obs_settings_dialog_en.jpg" alt="OBS settings dialog with fields highlighted"></div>
+        <table class="map zh mac">
+          <tr><th>Moor 顯示的名稱</th><th>貼到 OBS 的欄位</th></tr>
+          <tr><td>Agora App ID</td><td>APPID</td></tr>
+          <tr><td>Agora Token</td><td>AppToken（可選）</td></tr>
+          <tr><td>Channel Name</td><td>頻道</td></tr>
+          <tr><td>String Uid</td><td>用户id（勾選右邊 Basic.Agora.StringUid）</td></tr>
+        </table>
+        <table class="map en mac">
+          <tr><th>Moor field</th><th>OBS field</th></tr>
+          <tr><td>Agora App ID</td><td>Agora APPID</td></tr>
+          <tr><td>Agora Token</td><td>Agora Token (Optional)</td></tr>
+          <tr><td>Channel Name</td><td>Channel Name</td></tr>
+          <tr><td>String Uid</td><td>Uid (Optional) — check "Basic.Agora.StringUid" on the right</td></tr>
+        </table>
+        <div class="shot zh win"><img src="img/obs_settings_dialog.jpg" alt="OBS 設定對話框，欄位已標紅框"></div>
+        <div class="shot en win"><img src="img/obs_settings_dialog_en.jpg" alt="OBS settings dialog with fields highlighted"></div>
+        <div class="shot zh mac"><img src="img/obs_settings_dialog_mac.jpg" alt="Mac OBS 設定對話框，欄位已標紅框"></div>
+        <div class="shot en mac"><img src="img/obs_settings_dialog_mac_en.jpg" alt="Mac OBS settings dialog with fields highlighted"></div>
         <div class="callout warn">
           <span class="ic">⚠️</span>
-          <span class="zh">貼上「用戶ID」後，<b>記得把右邊的「StringUid」打勾</b>。這組 ID 是文字混數字，沒打勾 OBS 會讀成純數字，直播會連不上。</span>
-          <span class="en"><b>After pasting the Uid, check the "StringUid" box on the right.</b> This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
+          <span class="zh win">貼上「用戶ID」後，<b>記得把右邊的「StringUid」打勾</b>。這組 ID 是文字混數字，沒打勾 OBS 會讀成純數字，直播會連不上。</span>
+          <span class="en win"><b>After pasting the Uid, check the "StringUid" box on the right.</b> This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
+          <span class="zh mac">貼上「用户id」後，<b>記得把右邊的「Basic.Agora.StringUid」打勾</b>（沒錯，Mac 上這個核取方塊的名稱沒有翻譯）。這組 ID 是文字混數字，沒打勾 OBS 會讀成純數字，直播會連不上。</span>
+          <span class="en mac"><b>After pasting the Uid, check the "Basic.Agora.StringUid" box on the right</b> (yes, that checkbox label is untranslated on Mac — that's expected). This ID mixes letters and numbers — without the checkbox OBS reads it as a plain number and the connection fails.</span>
         </div>
         <p class="zh" style="margin-top:14px;">全部貼好、確認打勾後，點擊「確定」。</p>
         <p class="en" style="margin-top:14px;">Once everything is filled in and checked, click <b>OK</b>.</p>
@@ -308,14 +400,32 @@
           <li>The button turns blue and changes to "Stop Streaming to Agora" — that's expected, it just means the stream is now live, not that anything broke.</li>
           <li>Back in Moor, once you see "Stream Source Connected", you're done!</li>
         </ol>
-        <div class="shot zh"><img src="img/agora_tool_start.jpg" alt="開始推流到聲網按鈕"></div>
-        <div class="shot zh"><img src="img/final_connected.jpg" alt="已連接訊號源確認畫面"></div>
-        <div class="shot en"><img src="img/agora_tool_start_en.jpg" alt="Start Streaming to Agora button"></div>
-        <div class="shot en"><img src="img/final_connected_en.jpg" alt="Stream Source Connected confirmation"></div>
+        <div class="shot zh win"><img src="img/agora_tool_start.jpg" alt="開始推流到聲網按鈕"></div>
+        <div class="shot zh win"><img src="img/final_connected.jpg" alt="已連接訊號源確認畫面"></div>
+        <div class="shot en win"><img src="img/agora_tool_start_en.jpg" alt="Start Streaming to Agora button"></div>
+        <div class="shot en win"><img src="img/final_connected_en.jpg" alt="Stream Source Connected confirmation"></div>
+
+        <div class="shot zh mac"><img src="img/agora_tool_start_mac.jpg" alt="Mac 開始推流到聲網按鈕"></div>
+        <div class="shot-row zh mac">
+          <div class="shot"><img src="img/final_connected_mac.jpg" alt="Mac 停止推流到聲網，已在推流中"></div>
+          <div class="shot"><img src="img/final_connected_mac_banner.jpg" alt="Moor 已連接訊號源"></div>
+        </div>
+        <div class="shot en mac"><img src="img/agora_tool_start_mac_en.jpg" alt="Mac Start Streaming to Agora button"></div>
+        <div class="shot en mac"><img src="img/final_connected_mac_en.jpg" alt="Mac Stream Source Connected confirmation"></div>
+
+        <div class="callout danger">
+          <span class="ic">🚫</span>
+          <span class="zh win">OBS 右側「控制項」面板裡也有一個「開始串流」按鈕——<b>那是不同的按鈕，不要點它！</b>你要點的是「聲網連麥」小視窗裡的「開始推流到聲網」，點錯 OBS 自己的「開始串流」會導致直播中斷。</span>
+          <span class="en win">OBS's own Controls panel also has a "Start Streaming" button — <b>that's a different button, don't click it!</b> You want "Start Streaming to Agora" inside the small Agora RTC Tool window. Clicking OBS's own Start Streaming will cut your stream.</span>
+          <span class="zh mac">OBS 右側「控制項」面板裡也有一個「開始直播」按鈕——<b>那是不同的按鈕，不要點它！</b>你要點的是「聲網連麥」小視窗裡的「開始推流到聲網」，點錯 OBS 自己的「開始直播」會導致直播中斷。</span>
+          <span class="en mac">OBS's own Controls panel also has a "Start Streaming" button — <b>that's a different button, don't click it!</b> You want "Start Streaming to Agora" inside the small Agora RTC Tool window. Clicking OBS's own Start Streaming will cut your stream.</span>
+        </div>
         <div class="callout tip">
           <span class="ic">💡</span>
-          <span class="zh">記得別關掉「聲網連麥」這個視窗，關掉的話畫面會中斷。</span>
-          <span class="en">Don't close the "Agora RTC Tool" window while live — closing it will cut the stream.</span>
+          <span class="zh win">記得別關掉「聲網連麥」這個視窗，關掉的話畫面會中斷。</span>
+          <span class="en win">Don't close the "Agora RTC Tool" window while live — closing it will cut the stream.</span>
+          <span class="zh mac">記得別關掉「聲網連麥」這個視窗，關掉的話畫面會中斷。</span>
+          <span class="en mac">Don't close the "Agora RTC Tool" window while live — closing it will cut the stream.</span>
         </div>
       </div>
     </div>
@@ -328,8 +438,33 @@
     <div class="step-body">
       <p class="zh"><b>每次開播都要重新貼一次資料嗎？</b><br>是的——Channel Name 跟 Agora Token 每場直播都會變動，開播前務必回到 Moor 複製最新的值。</p>
       <p class="en"><b>Do I need to re-paste the values every time?</b><br>Yes — Channel Name and Agora Token change every stream, so copy the latest values from Moor before each broadcast.</p>
-      <p class="zh" style="margin-top:18px;"><b>OBS 啟動時出現無法載入 "agora-ui-tools" 的錯誤？</b><br>到 <code>C:\Program Files\obs-studio\data\obs-plugins</code>，移除資料夾裡的 <code>agora-tool-ui</code>，重新安裝 Agora 插件後重啟 OBS 即可修正。</p>
-      <p class="en" style="margin-top:18px;"><b>OBS shows an error that it can't load "agora-ui-tools"?</b><br>Go to <code>C:\Program Files\obs-studio\data\obs-plugins</code>, remove the <code>agora-tool-ui</code> folder, reinstall the Agora plugin, then restart OBS.</p>
+      <p class="zh" style="margin-top:18px;"><b>OBS 啟動時出現無法載入 "agora-ui-tools" 的錯誤？</b><br>
+        <span class="win">到 <code>C:\Program Files\obs-studio\data\obs-plugins</code>，移除資料夾裡的 <code>agora-tool-ui</code>，重新安裝 Agora 插件後重啟 OBS 即可修正。</span>
+        <span class="mac">到 <code>~/Library/Application Support/obs-studio/plugins</code>，移除 <code>agora-tool-ui.plugin</code>，重新安裝 Agora 插件後重啟 OBS 即可修正。</span>
+      </p>
+      <p class="en" style="margin-top:18px;"><b>OBS shows an error that it can't load "agora-ui-tools"?</b><br>
+        <span class="win">Go to <code>C:\Program Files\obs-studio\data\obs-plugins</code>, remove the <code>agora-tool-ui</code> folder, reinstall the Agora plugin, then restart OBS.</span>
+        <span class="mac">Go to <code>~/Library/Application Support/obs-studio/plugins</code>, remove <code>agora-tool-ui.plugin</code>, reinstall the Agora plugin, then restart OBS.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="videos">
+    <h2 class="zh">影片教學</h2>
+    <h2 class="en">Video walkthrough</h2>
+    <p class="sub zh">文字看不夠清楚？跟著錄好的完整操作影片一步步做。</p>
+    <p class="sub en">Prefer to watch? Follow the full recorded walkthrough step by step.</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="label zh">🎬 中文版設定教學</div>
+        <div class="label en">🎬 English walkthrough</div>
+        <video controls preload="metadata" class="zh">
+          <source src="video/obs_setup_zh.mp4" type="video/mp4">
+        </video>
+        <video controls preload="metadata" class="en">
+          <source src="video/obs_setup_en.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </section>
 
@@ -342,10 +477,17 @@
 
 <script>
   function setLang(lang){
-    document.body.className = 'lang-' + lang;
+    document.body.classList.remove('lang-zh','lang-en');
+    document.body.classList.add('lang-' + lang);
     document.getElementById('btn-zh').classList.toggle('active', lang === 'zh');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
     document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+  }
+  function setOS(os){
+    document.body.classList.remove('os-win','os-mac');
+    document.body.classList.add('os-' + os);
+    document.getElementById('btn-win').classList.toggle('active', os === 'win');
+    document.getElementById('btn-mac').classList.toggle('active', os === 'mac');
   }
 </script>
 
